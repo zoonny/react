@@ -16,7 +16,7 @@ const Dashboard = React.lazy(() => import('views/medi/dashboard/Dashboard'));
 
 // 예제
 const Alert = React.lazy(() => import('views/example/alert/ReactAlertExample'));
-const Crud = React.lazy(() => import('views/example/crud/CrudExample'));
+const Post = React.lazy(() => import('containers/example/crud/PostContainer'));
 const DataGrid = React.lazy(() =>
   import('views/example/datagrid/SimpleGridExample'),
 );
@@ -72,7 +72,7 @@ const routes = [
     path: '/example/crud',
     exact: true,
     name: 'Crud',
-    component: Crud,
+    component: Post,
   },
   {
     path: '/example/datagrid',
