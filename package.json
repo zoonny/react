@@ -1,0 +1,91 @@
+{
+  "name": "MMP",
+  "version": "0.0.1",
+  "description": "Medical Information Mediation Platform",
+  "author": "hyung",
+  "copyright": "Copyright 2019 KT",
+  "license": "MIT",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:mmp.git"
+  },
+  "dependencies": {
+    "@coreui/coreui": "^2.1.1",
+    "@coreui/coreui-plugin-chartjs-custom-tooltips": "^1.2.0",
+    "@coreui/icons": "0.3.0",
+    "@coreui/react": "^2.1.1",
+    "axios": "^0.18.0",
+    "bootstrap": "^4.1.3",
+    "chart.js": "^2.7.3",
+    "classnames": "^2.2.6",
+    "core-js": "^2.5.7",
+    "enzyme": "^3.7.0",
+    "enzyme-adapter-react-16": "^1.7.0",
+    "flag-icon-css": "^3.2.1",
+    "font-awesome": "^4.7.0",
+    "immutable": "^4.0.0-rc.12",
+    "include-media": "^1.4.9",
+    "moment": "^2.23.0",
+    "node-sass": "^4.10.0",
+    "open-color": "^1.6.3",
+    "prop-types": "^15.6.2",
+    "query-string": "5",
+    "rc-tree": "^1.14.9",
+    "react": "^16.6.3",
+    "react-alert": "^4.0.4",
+    "react-alert-template-basic": "^1.0.0",
+    "react-app-polyfill": "^0.1.3",
+    "react-chartjs-2": "^2.7.2",
+    "react-data-grid": "^5.0.5",
+    "react-datepicker": "^2.0.0",
+    "react-dates": "^18.4.0",
+    "react-dom": "^16.6.3",
+    "react-helmet": "^5.2.0",
+    "react-intl": "^2.8.0",
+    "react-loadable": "^5.5.0",
+    "react-redux": "^6.0.0",
+    "react-responsive-modal": "^3.5.1",
+    "react-router-config": "^4.4.0-beta.6",
+    "react-router-dom": "^4.3.1",
+    "react-table": "^6.8.6",
+    "react-test-renderer": "^16.6.3",
+    "react-virtualized": "^9.21.0",
+    "react-virtualized-tree": "^2.3.10",
+    "reactstrap": "^6.5.0",
+    "redux": "^4.0.1",
+    "redux-actions": "^2.6.4",
+    "redux-logger": "^3.0.6",
+    "redux-pender": "^2.0.12",
+    "simple-line-icons": "^2.4.1"
+  },
+  "devDependencies": {
+    "eslint-config-airbnb": "^17.1.0",
+    "react-scripts": "^2.1.1"
+  },
+  "scripts": {
+    "start": "cp ./.env.dev ./.env && react-scripts start",
+    "start:stg": "cp ./.env.stg ./.env && react-scripts start",
+    "start:prd": "cp ./.env.prd ./.env && react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "test:cov": "react-scripts test --coverage",
+    "test:debug": "react-scripts --inspect-brk test --runInBand",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {},
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 9",
+    "not op_mini all"
+  ],
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}",
+      "!**/*index.js",
+      "!src/serviceWorker.js",
+      "!src/polyfill.js"
+    ]
+  }
+}

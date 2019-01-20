@@ -1,0 +1,162 @@
+{
+  "items": [
+    {
+      "title": true,
+      "name": "중개 관리",
+      "wrapper": {
+        "element": "",
+        "attributes": {}
+      },
+      "class": ""
+    },
+    {
+      "name": "중개 대시보드",
+      "url": "/dashboard",
+      "icon": "icon-speedometer"
+    },
+    {
+      "title": true,
+      "name": "정산 관리"
+    },
+    {
+      "name": "정산 기준 관리",
+      "url": "/setlBase",
+      "icon": "icon-drop",
+      "children": [
+        {
+          "name": "정산 항목 관리",
+          "url": "/setlBase/setlItem",
+          "icon": "icon-drop"
+        },
+        {
+          "name": "정산 요율 관리",
+          "url": "/setlBase/setlRat",
+          "icon": "icon-drop"
+        },
+        {
+          "name": "정산 대상 관리",
+          "url": "/setlBase/setlTgt",
+          "icon": "icon-drop"
+        }
+      ]
+    },
+    {
+      "name": "정산 내역 관리",
+      "url": "/setl",
+      "icon": "icon-pencil",
+      "children": [
+        {
+          "name": "정산 내역 조회",
+          "url": "/setl/setlTxn",
+          "icon": "icon-pencil"
+        },
+        {
+          "name": "정산 청구 처리",
+          "url": "/setl/setlBill",
+          "icon": "icon-pencil"
+        }
+      ]
+    },
+    {
+      "name": "정산 통계",
+      "url": "/setlStat",
+      "icon": "icon-puzzle",
+      "children": [
+        {
+          "name": "정산 내역 통계",
+          "url": "/setlStat/setlInfoStat",
+          "icon": "icon-puzzle"
+        },
+        {
+          "name": "정산 청구 통계",
+          "url": "/setlStat/setlBillStat",
+          "icon": "icon-puzzle"
+        }
+      ]
+    },
+    {
+      "title": true,
+      "name": "시스템 관리"
+    },
+    {
+      "name": "사용자 관리",
+      "url": "/onm",
+      "icon": "icon-cursor",
+      "children": [
+        {
+          "name": "사용자/권한 관리",
+          "url": "/onm/userInfo",
+          "icon": "icon-cursor"
+        },
+        {
+          "name": "메뉴/권한 관리",
+          "url": "/onm/menuInfo",
+          "icon": "icon-cursor"
+        }
+      ]
+    },
+    {
+      "name": "코드 관리",
+      "url": "/code",
+      "icon": "icon-star",
+      "children": [
+        {
+          "name": "코드 정보 관리",
+          "url": "/code/codeInfo",
+          "icon": "icon-star"
+        }
+      ]
+    },
+    {
+      "title": true,
+      "name": "예제"
+    },
+    {
+      "name": "예제 모음",
+      "url": "/example",
+      "icon": "icon-ban",
+      "children": [
+        {
+          "name": "CRUD",
+          "url": "/example/crud",
+          "icon": "icon-ban"
+        },
+        {
+          "name": "Modal",
+          "url": "/example/modal",
+          "icon": "icon-ban"
+        },
+        {
+          "name": "Alert",
+          "url": "/example/alert",
+          "icon": "icon-ban"
+        },
+        {
+          "name": "Table",
+          "url": "/example/table",
+          "icon": "icon-ban"
+        },
+        {
+          "name": "DatePicker",
+          "url": "/example/datepicker",
+          "icon": "icon-ban"
+        },
+        {
+          "name": "DataGrid",
+          "url": "/example/datagrid",
+          "icon": "icon-ban"
+        },
+        {
+          "name": "Tree",
+          "url": "/example/tree",
+          "icon": "icon-ban"
+        },
+        {
+          "name": "List",
+          "url": "/example/list",
+          "icon": "icon-ban"
+        }
+      ]
+    }
+  ]
+}
