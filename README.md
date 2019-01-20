@@ -2,23 +2,25 @@
 
 ## install
 
+```shell
 yarn add axios classnames immutable moment;
 yarn add redux redux-actions react-redux redux-pender;
 yarn add open-color include-media;
 yarn add query-string@5;
+```
 
 ## directory
 
 ## reference
 
-DatePicker : https://reactdatepicker.com/
-Table : https://www.npmjs.com/package/react-table
-DataGrid : https://adazzle.github.io/react-data-grid/
-Tree : https://www.npmjs.com/package/rc-tree
-React Virtualized : https://bvaughn.github.io/react-virtualized/#/components/Grid
-React Virtualized Tree : https://diogofcunha.github.io/react-virtualized-tree/#/examples/basic-tree
-Alert : https://www.npmjs.com/package/react-alert
-React Date : https://github.com/airbnb/react-dates
+- DatePicker : https://reactdatepicker.com/
+- Table : https://www.npmjs.com/package/react-table
+- DataGrid : https://adazzle.github.io/react-data-grid/
+- Tree : https://www.npmjs.com/package/rc-tree
+- React Virtualized : https://bvaughn.github.io/react-virtualized/#/components/Grid
+- React Virtualized Tree : https://diogofcunha.github.io/react-virtualized-tree/#/examples/basic-tree
+- Alert : https://www.npmjs.com/package/react-alert
+- React Date : https://github.com/airbnb/react-dates
 
 ## vscode shotcut
 
