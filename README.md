@@ -52,9 +52,12 @@ root directory : --prefix=/usr/local/Cellar/nginx/1.15.8/html
 1. git login
 2. create new repository
 3. go to local source directory
-4. # git init
-5. # git config -global user.name "zoony"
-6. # git add .
-7. # git commit -m 'first commit'
-8. # git remote add origin https://github.com/zoonny/react.git
-9. # git push -u origin master
+
+```shell
+git init
+git config -global user.name "zoony"
+git add .
+git commit -m 'first commit'
+git remote add origin https://github.com/zoonny/react.git
+git push -u origin master
+```
