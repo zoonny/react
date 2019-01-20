@@ -46,3 +46,15 @@ reload : nginx -s reload
 
 config file : /usr/local/etc/nginx/nginx.conf
 root directory : --prefix=/usr/local/Cellar/nginx/1.15.8/html
+
+### git
+
+1. git login
+2. create new repository
+3. go to local source directory
+4. # git init
+5. # git config -global user.name "zoony"
+6. # git add .
+7. # git commit -m 'first commit'
+8. # git remote add origin https://github.com/zoonny/react.git
+9. # git push -u origin master
