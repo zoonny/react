@@ -104,6 +104,10 @@ class LayoutContainer extends Component {
     }, 1000);
   }
 
+  onOpenConfirmModal() {
+    console.log('onOpenConfirmModal');
+  }
+
   render() {
     console.log('render...');
 
@@ -144,6 +148,7 @@ class LayoutContainer extends Component {
                           path={route.path}
                           exact={route.exact}
                           name={route.name}
+                          onOpenConfirmModal={this.onOpenConfirModal}
                           render={props => <route.component {...props} />}
                         />
                       ) : null;

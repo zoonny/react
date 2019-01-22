@@ -1,15 +1,25 @@
 import React, { Component } from 'react';
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 
-const ConfirmModal = ({ visible, toggle, onConfirm, onCancel, className }) => (
-  <Modal isOpen={visible} toggle={toggle} className={className}>
-    <ModalHeader toggle={toggle}>타이틀</ModalHeader>
-    <ModalBody>메시지</ModalBody>
+const ConfirmModal = ({
+  visible,
+  toggle,
+  title,
+  message,
+  args,
+  onConfirm,
+  onCancel,
+  className,
+}) => (
+  <Modal isOpen={visible} toggle={toggle} className={'modal-sm ' + className}>
+    <ModalHeader toggle={toggle}>{title}</ModalHeader>
+    <ModalBody>{message}</ModalBody>
     <ModalFooter>
-      <Button color="primary" onClick={onConfirm}>
+      {/* <Button id="ok" color="primary" onClick={onConfirm}> */}
+      <Button id={args} color="primary" onClick={onConfirm}>
         확인
       </Button>{' '}
-      <Button color="secondary" onClick={onCancel}>
+      <Button id="cancel" color="secondary" onClick={onCancel}>
         취소
       </Button>
     </ModalFooter>

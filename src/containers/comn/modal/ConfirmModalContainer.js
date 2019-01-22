@@ -6,28 +6,29 @@ import ConfirmModal from 'views/comn/modal/ConfirmModal';
 import { withRouter } from 'react-router-dom';
 
 class ConfirmModalContainer extends Component {
-  handleCancel = () => {
+  handleCancel = e => {
     const { BaseActions } = this.props;
-    BaseActions.hideModal('confirm');
+    BaseActions.hideModal({ modalName: 'confirm' });
   };
 
-  handleConfirm = () => {
-    console.log('handleConfirm');
-  };
-
-  toggle = () => {
+  toggle = e => {
     this.handleCancel();
   };
 
   render() {
-    const { visible } = this.props;
-    const { handleCancel, handleConfirm, toggle } = this;
+    const { visible, title, message, onConfirm, args } = this.props;
+    const { handleCancel, toggle } = this;
+
+    console.log('args', args);
 
     return (
       <ConfirmModal
         visible={visible}
         toggle={toggle}
-        onConfirm={handleConfirm}
+        title={title}
+        message={message}
+        args={args}
+        onConfirm={onConfirm}
         onCancel={handleCancel}
         className={null}
       />
@@ -37,7 +38,11 @@ class ConfirmModalContainer extends Component {
 
 export default connect(
   state => ({
-    visible: state.base.getIn(['modal', 'confirm']),
+    visible: state.base.getIn(['modal', 'confirm', 'visible']),
+    title: state.base.getIn(['modal', 'confirm', 'title']),
+    message: state.base.getIn(['modal', 'confirm', 'message']),
+    onConfirm: state.base.getIn(['modal', 'confirm', 'onConfirm']),
+    args: state.base.getIn(['modal', 'confirm', 'args']),
   }),
   dispatch => ({
     BaseActions: bindActionCreators(baseActions, dispatch),

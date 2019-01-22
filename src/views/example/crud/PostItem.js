@@ -18,19 +18,19 @@ function PostItem({ index, post, onItemClick, onItemEdit, onItemDelete }) {
 
   return (
     <tr key={_id}>
-      <th scope="row">{index}</th>
+      <th scope="row">{index + 1}</th>
       <td id={_id} onClick={onItemClick}>
         {/* <Link to={`/post/${_id}`}>{title}</Link> */}
-        <b>{title}</b>
+        <b id={_id}>{title}</b>
       </td>
       <td>{body && body.length > 20 ? body.substr(0, 20) : body}</td>
       <td>{tags ? tags.join(',') : ''}</td>
       <td>{moment(publishedDate).format('ll')}</td>
       <td id={_id}>
-        <Button color="dark" outline size="sm" onClick={onItemEdit}>
+        <Button id={_id} color="dark" outline size="sm" onClick={onItemEdit}>
           수정
         </Button>{' '}
-        <Button color="dark" outline size="sm" onClick={onItemDelete}>
+        <Button id={_id} color="dark" outline size="sm" onClick={onItemDelete}>
           삭제
         </Button>
       </td>

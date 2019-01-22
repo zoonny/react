@@ -22,7 +22,13 @@ export const getMenu = createAction(GET_MENU, api.getMenu);
 const initialState = Map({
   // 모달의 가시성 상태
   modal: Map({
-    confirm: false, // 추후 구현될 로그인 모달
+    confirm: {
+      visible: false,
+      title: '',
+      message: '',
+      onConfirm: null,
+      args: null,
+    }, // 추후 구현될 로그인 모달
   }),
   // Alert의 가시성 상태
   alert: Map({
@@ -35,12 +41,24 @@ const initialState = Map({
 export default handleActions(
   {
     [SHOW_MODAL]: (state, action) => {
-      const { payload: modalName } = action;
-      return state.setIn(['modal', modalName], true);
+      const { modalName, title, message, onConfirm, args } = action.payload;
+      console.log('payload', action.payload);
+      console.log('args', args);
+      return state
+        .setIn(['modal', modalName, 'visible'], true)
+        .setIn(['modal', modalName, 'title'], title)
+        .setIn(['modal', modalName, 'message'], message)
+        .setIn(['modal', modalName, 'onConfirm'], onConfirm)
+        .setIn(['modal', modalName, 'args'], args);
     },
     [HIDE_MODAL]: (state, action) => {
-      const { payload: modalName } = action;
-      return state.setIn(['modal', modalName], false);
+      const { modalName } = action.payload;
+      return state
+        .setIn(['modal', modalName, 'visible'], false)
+        .setIn(['modal', modalName, 'title'], '')
+        .setIn(['modal', modalName, 'message'], '')
+        .setIn(['modal', modalName, 'onConfirm'], null)
+        .setIn(['modal', modalName, 'args'], null);
     },
     [SHOW_ALERT]: (state, action) => {
       const { payload: alertName } = action;

@@ -12,10 +12,18 @@ import {
 import PostItem from './PostItem';
 
 class PostList extends Component {
+  state = {
+    posts: null,
+  };
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log('componentDidUpdate');
+  }
+
   render() {
     const { posts, onItemClick, onItemEdit, onItemDelete } = this.props;
 
-    if (!posts) return <div>loading...</div>;
+    if (!posts) return <div>No Data...</div>;
 
     return (
       <div className="animated fadeIn">

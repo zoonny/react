@@ -6,13 +6,17 @@ import { pender } from 'redux-pender';
 import * as api from 'apis/example/api';
 
 // action types
-const WRITE_POST = 'crud/WRITE_POST';
-const GET_POST_LIST = 'crud/GET_POST_LIST';
-const GET_POST = 'crud/GET_POST';
-const EDIT_POST = 'crud/EDIT_POST';
-const REMOVE_POST = 'crud/REMOVE_POST';
+const INITIALIZE = 'post/INITIALIZE';
+const CHANGE_INPUT = 'post/CHANGE_INPUT';
+const WRITE_POST = 'post/WRITE_POST';
+const GET_POST_LIST = 'post/GET_POST_LIST';
+const GET_POST = 'post/GET_POST';
+const EDIT_POST = 'post/EDIT_POST';
+const REMOVE_POST = 'post/REMOVE_POST';
 
 // action creators
+export const initialize = createAction(INITIALIZE);
+export const changeInput = createAction(CHANGE_INPUT);
 export const writePost = createAction(WRITE_POST, api.writePost);
 export const getPostList = createAction(
   GET_POST_LIST,
