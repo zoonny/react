@@ -117,8 +117,8 @@
       "icon": "icon-ban",
       "children": [
         {
-          "name": "CRUD",
-          "url": "/example/crud",
+          "name": "Post",
+          "url": "/example/post",
           "icon": "icon-ban"
         },
         {

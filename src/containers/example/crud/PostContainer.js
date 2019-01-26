@@ -12,6 +12,8 @@ import {
   Row,
   Button,
   Input,
+  Form,
+  FormGroup,
 } from 'reactstrap';
 import PostList from 'views/example/crud/PostList';
 import Paging from 'views/example/crud/Paging';
@@ -385,29 +387,37 @@ class PostContainer extends Component {
           <Col xl={12}>
             <Card>
               <CardHeader>
-                <i className="fa fa-align-justify" /> Posts{' '}
-                <small className="text-muted">example</small>{' '}
-                <Button
-                  color="dark"
-                  outline
-                  size="sm"
-                  onClick={handleOpenPostEditModal}
-                >
-                  등록
-                </Button>{' '}
-                <Input
-                  type="text"
-                  id="tag"
-                  name="tag"
-                  placeholder="태그"
-                  size="sm"
-                  value={tag}
-                  onChange={onChange}
-                  // {...opts}
-                />{' '}
-                <Button color="dark" outline size="sm" onClick={handleSearch}>
-                  검색
-                </Button>
+                <Col md="2">
+                  <i className="fa fa-align-justify" /> Posts{' '}
+                  <small className="text-muted">example</small>
+                </Col>
+                <Col md="6">
+                  <Input
+                    type="text"
+                    id="tag"
+                    name="tag"
+                    placeholder="태그"
+                    size="sm"
+                    value={tag}
+                    onChange={onChange}
+                    // {...opts}
+                  />
+                </Col>
+                <Col md="2">
+                  <Button color="dark" outline size="sm" onClick={handleSearch}>
+                    검색
+                  </Button>
+                </Col>
+                <Col md="2" className="float-right">
+                  <Button
+                    color="dark"
+                    outline
+                    size="sm"
+                    onClick={handleOpenPostEditModal}
+                  >
+                    등록
+                  </Button>
+                </Col>
               </CardHeader>
               <CardBody>
                 {/* <Paging page={page} lastPage={lastPage} tag={tag} /> */}
