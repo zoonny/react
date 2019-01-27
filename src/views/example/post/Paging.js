@@ -45,8 +45,6 @@ class Paging extends Component {
       };
     }
 
-    console.log('page', page);
-
     return (
       <div className="animated fadeIn">
         <Pagination className="pagination justify-content-center">
@@ -55,8 +53,6 @@ class Paging extends Component {
           </PaginationItem>
           {pageArr.map((item, index) => {
             let opts = null;
-
-            console.log('item', item, 'page', page);
 
             if (item === page) {
               opts = {

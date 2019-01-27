@@ -1,6 +1,6 @@
 export default {
   ko: {
-    'comn.app_nm': '보험 중개 플랫폼',
+    'comn.app_nm': '의료 정보 중개 플랫폼',
     'comn.login': '로그인',
     'comn.logout': '로그아웃',
     'comn.id': '아이디',

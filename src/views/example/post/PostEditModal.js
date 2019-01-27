@@ -13,11 +13,9 @@ import {
   DropdownMenu,
   DropdownToggle,
   Fade,
-  Form,
   FormGroup,
   FormText,
   FormFeedback,
-  Input,
   InputGroup,
   InputGroupAddon,
   InputGroupText,
@@ -28,6 +26,12 @@ import {
   ModalFooter,
   ModalHeader,
 } from 'reactstrap';
+import {
+  Form,
+  Input,
+  Button as V_Button,
+} from 'views/comn/validation/FormValidation';
+import * as v from 'libs/Validations';
 
 class PostEditModal extends Component {
   render() {
@@ -74,8 +78,9 @@ class PostEditModal extends Component {
                     value={post.title}
                     onChange={onChange}
                     {...opts}
+                    validations={[v.required]}
                   />
-                  <FormText color="muted">제목을 입력하세요.</FormText>
+                  {/* <FormText>제목을 입력하세요.</FormText> */}
                 </Col>
               </FormGroup>
               <FormGroup row>
@@ -92,8 +97,8 @@ class PostEditModal extends Component {
                     value={post.body}
                     onChange={onChange}
                     {...opts}
+                    validations={[v.required]}
                   />
-                  <FormText color="muted">내용을 입력하세요.</FormText>
                 </Col>
               </FormGroup>
               <FormGroup row>
@@ -109,32 +114,30 @@ class PostEditModal extends Component {
                     value={post.tags}
                     onChange={onChange}
                     {...opts}
+                    validations={[v.required]}
                   />
-                  <FormText color="muted">
-                    태그는 쉼표(,)로 구분하여 입력하세요.
-                  </FormText>
                 </Col>
               </FormGroup>
               {editMode === 'w' && (
                 <>
-                  <Button type="submit" size="sm" color="primary">
+                  <V_Button type="submit" size="sm" color="primary">
                     <i className="fa fa-dot-circle-o" /> 등록
-                  </Button>
+                  </V_Button>
                 </>
-              )}
+              )}{' '}
               {editMode === 'e' && (
                 <>
-                  <Button type="submit" size="sm" color="primary">
+                  <V_Button type="submit" size="sm" color="primary">
                     <i className="fa fa-dot-circle-o" /> 수정
-                  </Button>
+                  </V_Button>
                 </>
-              )}
+              )}{' '}
               <Button type="reset" size="sm" color="danger" onClick={onCancel}>
                 <i className="fa fa-ban" /> 닫기
               </Button>
             </Form>
           </CardBody>
-          <CardFooter />
+          {/* <CardFooter /> */}
         </Card>
       </Modal>
     );

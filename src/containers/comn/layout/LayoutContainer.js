@@ -118,7 +118,7 @@ class LayoutContainer extends Component {
         <div className="app">
           <Helmet>
             <meta charsSet="utf-8" />
-            <title>보험 중개 플랫폼</title>
+            <title>의료 정보 중개 플랫폼</title>
           </Helmet>
           <AppHeader fixed>
             <Suspense fallback={this.loading()}>

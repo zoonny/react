@@ -2,10 +2,29 @@ import React, { Component } from 'react';
 import { Button, Card, CardBody, CardHeader, Col, Row } from 'reactstrap';
 import PropTypes from 'prop-types';
 import ConfirmModal from 'views/comn/modal/ConfirmModal';
+import Form from 'react-validation/build/form';
+import Input from 'react-validation/build/input';
+import { form, control, button } from 'react-validation';
+import './ModalExample.scss';
+
+const required = value => {
+  if (!value.toString().trim().length) {
+    return <div className="validate">require</div>;
+  }
+};
+
+const ButtonWrapper = ({ hasErrors, ...props }) => {
+  return <Button {...props} disabled={hasErrors} />;
+};
+
+const ValidationButton = button(ButtonWrapper);
 
 class ModalExample extends Component {
   state = {
     visible: false,
+    title: '타이틀',
+    message: '메시지',
+    args: 'id',
   };
 
   handleOpenModal = () => {
@@ -16,13 +35,23 @@ class ModalExample extends Component {
     this.setState({ visible: false });
   };
 
-  handleConfirm = () => {
-    console.log('confirm');
+  handleConfirm = e => {
+    console.log('confirm', e.target);
   };
 
+  handleSubmit = e => {
+    e.preventDefault();
+
+    console.log('handleSubmit');
+
+    this.form.validateAll();
+  };
+
+  componentDidMount() {}
+
   render() {
-    const { visible } = this.state;
-    const { handleOpenModal, handleConfirm, handleCancel } = this;
+    const { visible, title, message, args } = this.state;
+    const { handleOpenModal, handleConfirm, handleCancel, handleSubmit } = this;
 
     return (
       <>
@@ -41,10 +70,47 @@ class ModalExample extends Component {
               </Col>
             </Row>
           </CardHeader>
-          <CardBody />
+          <CardBody>
+            <Form
+              ref={c => {
+                this.form = c;
+              }}
+              onSubmit={handleSubmit}
+            >
+              <h3>Login</h3>
+              <div>
+                <label>
+                  Email*
+                  <Input
+                    // value="email@email.com"
+                    type="text"
+                    name="email"
+                    // validations={[required, email]}
+                    validations={[required]}
+                  />
+                </label>
+              </div>
+              <div>
+                <label>
+                  Password*
+                  <Input
+                    type="password"
+                    name="password"
+                    validations={[required]}
+                  />
+                </label>
+              </div>
+              <div>
+                <ValidationButton>Submit</ValidationButton>
+              </div>
+            </Form>
+          </CardBody>
         </Card>
         <ConfirmModal
           visible={visible}
+          title={title}
+          message={message}
+          args={args}
           toggle={handleCancel}
           onConfirm={handleConfirm}
           onCancel={handleCancel}

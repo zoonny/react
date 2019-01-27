@@ -44,54 +44,8 @@ class PostContainer extends Component {
     }
   };
 
-  updatePostList = () => {
-    setTimeout(() => {
-      this.getPostList();
-    }, 100);
-  };
-
-  getPost = async id => {
-    const { PostActions } = this.props;
-
-    try {
-      await PostActions.getPost(id);
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
-  writePost = async post => {
-    const { PostActions } = this.props;
-
-    try {
-      await PostActions.writePost(post);
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
-  editPost = async post => {
-    const { PostActions } = this.props;
-
-    try {
-      await PostActions.editPost(post);
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
-  removePost = async id => {
-    const { PostActions } = this.props;
-
-    try {
-      await PostActions.removePost(id);
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
-  componentDidMount() {
-    this.initialize();
+  async componentDidMount() {
+    await this.initialize();
     this.getPostList();
   }
 
@@ -113,10 +67,10 @@ class PostContainer extends Component {
   };
 
   // PostItem
-  handleItemClick = e => {
-    this.getPost(e.target.id);
-
+  handleItemClick = async e => {
     const { PostActions } = this.props;
+
+    await PostActions.getPost(e.target.id);
 
     PostActions.openPostEditModal({
       visible: true,
@@ -124,10 +78,10 @@ class PostContainer extends Component {
     });
   };
 
-  handleItemEdit = e => {
-    this.getPost(e.target.id);
-
+  handleItemEdit = async e => {
     const { PostActions } = this.props;
+
+    await PostActions.getPost(e.target.id);
 
     PostActions.openPostEditModal({
       visible: true,
@@ -147,23 +101,23 @@ class PostContainer extends Component {
     });
   };
 
-  deleteItem = e => {
-    const { BaseActions } = this.props;
+  deleteItem = async e => {
+    const { BaseActions, PostActions } = this.props;
 
-    this.removePost(e.target.id);
+    await PostActions.removePost(e.target.id);
 
-    BaseActions.hideModal({
+    await BaseActions.hideModal({
       modalName: 'confirm',
     });
 
-    this.updatePostList();
+    this.getPostList();
   };
 
   // PostEdit
-  handleOpenPostEditModal = e => {
+  handleOpenPostEditModal = async e => {
     const { PostActions } = this.props;
 
-    PostActions.initializePostEdit();
+    await PostActions.initializePostEdit();
 
     PostActions.openPostEditModal({
       visible: true,
@@ -189,66 +143,67 @@ class PostContainer extends Component {
     });
   };
 
-  handlePostEditSubmit = e => {
+  handlePostEditSubmit = async e => {
     e.preventDefault();
 
-    const { editMode } = this.props;
+    const { editMode, PostActions } = this.props;
 
     const form = e.target;
     const data = new FormData(form);
 
     InputParser.parseInputData(form, data);
 
+    const post = {
+      title: data.get('title'),
+      body: data.get('body'),
+      tags: data.get('tags') ? data.get('tags').split(',') : [],
+    };
+
     if (editMode === 'w') {
-      this.writePost({
-        title: data.get('title'),
-        body: data.get('body'),
-        tags: data.get('tags') ? data.get('tags').split(',') : [],
-      });
+      await PostActions.writePost(post);
     } else if (editMode === 'e') {
-      this.editPost({
+      await PostActions.editPost({
+        ...post,
         id: e.target.id,
-        title: data.get('title'),
-        body: data.get('body'),
-        tags: data.get('tags') ? data.get('tags').split(',') : [],
       });
     }
 
-    this.updatePostList();
+    this.getPostList();
     this.handlePostEditCancel();
   };
 
-  handleClickPage = e => {
+  // Paging
+  handleClickPage = async e => {
     const { BaseActions } = this.props;
 
-    BaseActions.clickPage({
+    await BaseActions.clickPage({
       view: 'post',
       page: parseInt(e.target.id),
     });
 
-    this.updatePostList();
+    this.getPostList();
   };
 
-  handleClickPrev = e => {
+  handleClickPrev = async e => {
     const { BaseActions, page, pageCount } = this.props;
 
-    BaseActions.clickPage({
+    await BaseActions.clickPage({
       view: 'post',
       page: PagingUtils.endPage(page, pageCount) - pageCount,
     });
 
-    this.updatePostList();
+    this.getPostList();
   };
 
-  handleClickNext = e => {
+  handleClickNext = async e => {
     const { BaseActions, page, pageCount } = this.props;
 
-    BaseActions.clickPage({
+    await BaseActions.clickPage({
       view: 'post',
       page: PagingUtils.startPage(page, pageCount) + pageCount,
     });
 
-    this.updatePostList();
+    this.getPostList();
   };
 
   render() {
