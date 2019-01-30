@@ -10,9 +10,6 @@ const HIDE_MODAL = 'base/HIDE_MODAL';
 const SHOW_ALERT = 'base/SHOW_ALERT';
 const HIDE_ALERT = 'base/HIDE_ALERT';
 const GET_MENU = 'base/GET_MENU';
-const CLICK_PAGE = 'base/CLICK_PAGE';
-const CLICK_PREV = 'base/CLICK_PREV';
-const CLICK_NEXT = 'base/CLICK_NEXT';
 
 // action creators
 export const showModal = createAction(SHOW_MODAL);
@@ -20,9 +17,6 @@ export const hideModal = createAction(HIDE_MODAL);
 export const showAlert = createAction(SHOW_ALERT);
 export const hideAlert = createAction(HIDE_ALERT);
 export const getMenu = createAction(GET_MENU, api.getMenu);
-export const clickPage = createAction(CLICK_PAGE);
-export const clickPrev = createAction(CLICK_PREV);
-export const clickNext = createAction(CLICK_NEXT);
 
 // initial state
 const initialState = fromJS({
@@ -40,14 +34,7 @@ const initialState = fromJS({
   alert: {
     warning: false, // 추후 구현될 Alert
   },
-  menu: null,
-  paging: {
-    post: {
-      page: 1,
-      lastPage: 5,
-      pageCount: 3,
-    }, // 추후 구현될 리스트 페이징
-  },
+  menu: [],
 });
 
 // reducer
@@ -87,18 +74,6 @@ export default handleActions(
         return state.set('menu', action.payload.data);
       },
     }),
-    [CLICK_PAGE]: (state, action) => {
-      const { view, page } = action.payload;
-      return state.setIn(['paging', view, 'page'], page);
-    },
-    [CLICK_PREV]: (state, action) => {
-      const { view, page } = action.payload;
-      return state.setIn(['paging', view, 'page'], page);
-    },
-    [CLICK_NEXT]: (state, action) => {
-      const { view, page } = action.payload;
-      return state.setIn(['paging', view, 'page'], page);
-    },
   },
   initialState,
 );

@@ -14,7 +14,7 @@ import moment from 'moment';
 
 function PostItem({ index, post, onItemClick, onItemEdit, onItemDelete }) {
   // don't pass key
-  const { _id, title, body, tags, publishedDate } = post.toJS();
+  const { _id, title, body, tags, publishedDate } = post;
 
   return (
     <tr key={_id}>

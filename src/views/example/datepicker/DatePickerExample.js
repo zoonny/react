@@ -5,11 +5,9 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 
 import DatePicker from 'react-datepicker';
-// import { registerLocale, setDefaultLocale } from DatePicker;
 import 'react-datepicker/dist/react-datepicker.css';
-// import ko from 'date-fns/locale/ko';
-// DatePicker.registerLocale('ko', ko);
-// DatePicker.setDefaultLocale('ko');
+
+import Date_Picker from 'react-date-picker';
 
 class DatePickerExample extends Component {
   constructor() {
@@ -57,6 +55,14 @@ class DatePickerExample extends Component {
                   dateFormat="yyyy/MM/dd"
                   locale="ko"
                 />
+              </Col>
+            </Row>
+            <Row className="align-items-center">
+              <Col col="6" sm="4" md="2" xl className="mb-3 mb-xl-0">
+                {'Date-Picker: '}
+              </Col>
+              <Col col="6" sm="4" md="2" xl className="mb-3 mb-xl-0">
+                <Date_Picker onChange={handleChange} value={date} />
               </Col>
             </Row>
           </CardHeader>

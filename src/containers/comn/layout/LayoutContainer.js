@@ -109,8 +109,6 @@ class LayoutContainer extends Component {
   }
 
   render() {
-    console.log('render...');
-
     if (this.state.render) {
       const { menu } = this.props;
 

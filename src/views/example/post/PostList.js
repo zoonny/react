@@ -16,9 +16,7 @@ class PostList extends Component {
     posts: null,
   };
 
-  componentDidUpdate(prevProps, prevState) {
-    console.log('componentDidUpdate');
-  }
+  componentDidUpdate(prevProps, prevState) {}
 
   render() {
     const { posts, onItemClick, onItemEdit, onItemDelete } = this.props;

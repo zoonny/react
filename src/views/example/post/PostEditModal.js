@@ -36,9 +36,7 @@ import * as v from 'libs/Validations';
 class PostEditModal extends Component {
   render() {
     const {
-      visible,
-      editMode,
-      opts,
+      edit,
       post,
       toggle,
       onSubmit,
@@ -48,12 +46,12 @@ class PostEditModal extends Component {
     } = this.props;
 
     return (
-      <Modal isOpen={visible} toggle={toggle} className={className}>
+      <Modal isOpen={edit.visible} toggle={toggle} className={className}>
         <Card>
           <CardHeader>
-            <strong>포스트</strong> {editMode === 'w' && ' 등록'}
-            {editMode === 'r' && ' 조회'}
-            {editMode === 'e' && ' 수정'}
+            <strong>포스트</strong> {edit.mode === 'w' && ' 등록'}
+            {edit.mode === 'r' && ' 조회'}
+            {edit.mode === 'e' && ' 수정'}
           </CardHeader>
           <CardBody>
             <Form
@@ -77,7 +75,7 @@ class PostEditModal extends Component {
                     data-parse="uppercase"
                     value={post.title}
                     onChange={onChange}
-                    {...opts}
+                    {...edit.opts}
                     validations={[v.required]}
                   />
                   {/* <FormText>제목을 입력하세요.</FormText> */}
@@ -96,7 +94,7 @@ class PostEditModal extends Component {
                     placeholder="내용을 입력하세요."
                     value={post.body}
                     onChange={onChange}
-                    {...opts}
+                    {...edit.opts}
                     validations={[v.required]}
                   />
                 </Col>
@@ -113,19 +111,19 @@ class PostEditModal extends Component {
                     placeholder="태그를 입력하세요."
                     value={post.tags}
                     onChange={onChange}
-                    {...opts}
+                    {...edit.opts}
                     validations={[v.required]}
                   />
                 </Col>
               </FormGroup>
-              {editMode === 'w' && (
+              {edit.mode === 'w' && (
                 <>
                   <V_Button type="submit" size="sm" color="primary">
                     <i className="fa fa-dot-circle-o" /> 등록
                   </V_Button>
                 </>
               )}{' '}
-              {editMode === 'e' && (
+              {edit.mode === 'e' && (
                 <>
                   <V_Button type="submit" size="sm" color="primary">
                     <i className="fa fa-dot-circle-o" /> 수정

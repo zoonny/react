@@ -1,6 +1,7 @@
 {
   "items": [
     {
+      "id": "MEDI",
       "title": true,
       "name": "중개 관리",
       "wrapper": {
@@ -10,30 +11,36 @@
       "class": ""
     },
     {
+      "id": "MEDI_01",
       "name": "중개 대시보드",
       "url": "/dashboard",
       "icon": "icon-speedometer"
     },
     {
+      "id": "SETL",
       "title": true,
       "name": "정산 관리"
     },
     {
+      "id": "SETL_01",
       "name": "정산 기준 관리",
       "url": "/setlBase",
       "icon": "icon-drop",
       "children": [
         {
+          "id": "SETL_01_01",
           "name": "정산 항목 관리",
           "url": "/setlBase/setlItem",
           "icon": "icon-drop"
         },
         {
+          "id": "SETL_01_02",
           "name": "정산 요율 관리",
           "url": "/setlBase/setlRat",
           "icon": "icon-drop"
         },
         {
+          "id": "SETL_01_03",
           "name": "정산 대상 관리",
           "url": "/setlBase/setlTgt",
           "icon": "icon-drop"
@@ -41,16 +48,19 @@
       ]
     },
     {
+      "id": "SETL_02",
       "name": "정산 내역 관리",
       "url": "/setl",
       "icon": "icon-pencil",
       "children": [
         {
+          "id": "SETL_02_01",
           "name": "정산 내역 조회",
           "url": "/setl/setlTxn",
           "icon": "icon-pencil"
         },
         {
+          "id": "SETL_02_02",
           "name": "정산 청구 처리",
           "url": "/setl/setlBill",
           "icon": "icon-pencil"
@@ -58,16 +68,19 @@
       ]
     },
     {
+      "id": "SETL_03",
       "name": "정산 통계",
       "url": "/setlStat",
       "icon": "icon-puzzle",
       "children": [
         {
+          "id": "SETL_03_01",
           "name": "정산 내역 통계",
           "url": "/setlStat/setlInfoStat",
           "icon": "icon-puzzle"
         },
         {
+          "id": "SETL_03_02",
           "name": "정산 청구 통계",
           "url": "/setlStat/setlBillStat",
           "icon": "icon-puzzle"
@@ -75,32 +88,38 @@
       ]
     },
     {
+      "id": "ONM",
       "title": true,
       "name": "시스템 관리"
     },
     {
+      "id": "ONM_01",
       "name": "사용자 관리",
       "url": "/onm",
       "icon": "icon-cursor",
       "children": [
         {
+          "id": "ONM_01_01",
           "name": "사용자/권한 관리",
-          "url": "/onm/userInfo",
+          "url": "/onm/userMgmt",
           "icon": "icon-cursor"
         },
         {
+          "id": "ONM_01_02",
           "name": "메뉴/권한 관리",
-          "url": "/onm/menuInfo",
+          "url": "/onm/menuMgmt",
           "icon": "icon-cursor"
         }
       ]
     },
     {
+      "id": "ONM_02",
       "name": "코드 관리",
       "url": "/code",
       "icon": "icon-star",
       "children": [
         {
+          "id": "ONM_02_01",
           "name": "코드 정보 관리",
           "url": "/code/codeInfo",
           "icon": "icon-star"
@@ -108,50 +127,60 @@
       ]
     },
     {
+      "id": "EXAMPLE",
       "title": true,
       "name": "예제"
     },
     {
+      "id": "EXAMPLE_01",
       "name": "예제 모음",
       "url": "/example",
       "icon": "icon-ban",
       "children": [
         {
+          "id": "EXAMPLE_01_01",
           "name": "Post",
           "url": "/example/post",
           "icon": "icon-ban"
         },
         {
+          "id": "EXAMPLE_01_02",
           "name": "Modal",
           "url": "/example/modal",
           "icon": "icon-ban"
         },
         {
+          "id": "EXAMPLE_01_03",
           "name": "Alert",
           "url": "/example/alert",
           "icon": "icon-ban"
         },
         {
+          "id": "EXAMPLE_01_04",
           "name": "Table",
           "url": "/example/table",
           "icon": "icon-ban"
         },
         {
+          "id": "EXAMPLE_01_05",
           "name": "DatePicker",
           "url": "/example/datepicker",
           "icon": "icon-ban"
         },
         {
+          "id": "EXAMPLE_01_06",
           "name": "DataGrid",
           "url": "/example/datagrid",
           "icon": "icon-ban"
         },
         {
+          "id": "EXAMPLE_01_07",
           "name": "Tree",
           "url": "/example/tree",
           "icon": "icon-ban"
         },
         {
+          "id": "EXAMPLE_01_08",
           "name": "List",
           "url": "/example/list",
           "icon": "icon-ban"

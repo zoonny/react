@@ -1,23 +1,13 @@
 import React, { Component } from 'react';
+import { Card, CardBody, CardHeader, Col, Row } from 'reactstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as baseActions from 'store/comn/base';
 import * as postActions from 'store/example/post';
 import { withRouter } from 'react-router-dom';
-import {
-  Badge,
-  Card,
-  CardBody,
-  CardHeader,
-  Col,
-  Row,
-  Button,
-  Input,
-  Form,
-  FormGroup,
-} from 'reactstrap';
+import PostSearch from 'views/example/post/PostSearch';
 import PostList from 'views/example/post/PostList';
-import Paging from 'views/example/post/Paging';
+import Paging from 'views/comn/paging/Paging';
 import PostEditModal from 'views/example/post/PostEditModal';
 import { Map, List, fromJS } from 'immutable';
 
@@ -25,42 +15,33 @@ import InputParser from 'libs/InputParser';
 import PagingUtils from 'libs/PagingUtils';
 
 class PostContainer extends Component {
-  initialize = () => {
-    const { PostActions } = this.props;
-
-    PostActions.initialize();
-  };
+  // PostContainer
+  componentDidMount() {
+    this.getPostList();
+  }
 
   getPostList = async () => {
-    const { page, tag, PostActions } = this.props;
+    const { search, paging, PostActions } = this.props;
 
     try {
       await PostActions.getPostList({
-        tag,
-        page,
+        tag: search.tag,
+        page: paging.page,
       });
     } catch (e) {
       console.error(e);
     }
   };
 
-  async componentDidMount() {
-    await this.initialize();
-    this.getPostList();
-  }
-
-  componentDidUpdate() {}
-
-  // PostContainer
   handleSearch = e => {
     this.getPostList();
   };
 
-  handleChange = e => {
+  handleSearchInputChange = e => {
     const { PostActions } = this.props;
     const { name, value } = e.target;
 
-    PostActions.changeInput({
+    PostActions.changeSearchInput({
       name,
       value,
     });
@@ -74,7 +55,7 @@ class PostContainer extends Component {
 
     PostActions.openPostEditModal({
       visible: true,
-      editMode: 'r',
+      mode: 'r',
     });
   };
 
@@ -85,7 +66,7 @@ class PostContainer extends Component {
 
     PostActions.openPostEditModal({
       visible: true,
-      editMode: 'e',
+      mode: 'e',
     });
   };
 
@@ -114,14 +95,14 @@ class PostContainer extends Component {
   };
 
   // PostEdit
-  handleOpenPostEditModal = async e => {
+  handlePostEditOpen = async e => {
     const { PostActions } = this.props;
 
     await PostActions.initializePostEdit();
 
     PostActions.openPostEditModal({
       visible: true,
-      editMode: 'w',
+      mode: 'w',
     });
   };
 
@@ -133,7 +114,7 @@ class PostContainer extends Component {
     });
   };
 
-  handlePostEditChange = e => {
+  handlePostEditInputChange = e => {
     const { PostActions } = this.props;
     const { name, value } = e.target;
 
@@ -146,7 +127,7 @@ class PostContainer extends Component {
   handlePostEditSubmit = async e => {
     e.preventDefault();
 
-    const { editMode, PostActions } = this.props;
+    const { edit, PostActions } = this.props;
 
     const form = e.target;
     const data = new FormData(form);
@@ -159,9 +140,9 @@ class PostContainer extends Component {
       tags: data.get('tags') ? data.get('tags').split(',') : [],
     };
 
-    if (editMode === 'w') {
+    if (edit.mode === 'w') {
       await PostActions.writePost(post);
-    } else if (editMode === 'e') {
+    } else if (edit.mode === 'e') {
       await PostActions.editPost({
         ...post,
         id: e.target.id,
@@ -173,65 +154,30 @@ class PostContainer extends Component {
   };
 
   // Paging
-  handleClickPage = async e => {
-    const { BaseActions } = this.props;
+  handleChangePage = async page => {
+    const { PostActions } = this.props;
 
-    await BaseActions.clickPage({
-      view: 'post',
-      page: parseInt(e.target.id),
-    });
-
-    this.getPostList();
-  };
-
-  handleClickPrev = async e => {
-    const { BaseActions, page, pageCount } = this.props;
-
-    await BaseActions.clickPage({
-      view: 'post',
-      page: PagingUtils.endPage(page, pageCount) - pageCount,
-    });
-
-    this.getPostList();
-  };
-
-  handleClickNext = async e => {
-    const { BaseActions, page, pageCount } = this.props;
-
-    await BaseActions.clickPage({
-      view: 'post',
-      page: PagingUtils.startPage(page, pageCount) + pageCount,
+    await PostActions.changePage({
+      page,
     });
 
     this.getPostList();
   };
 
   render() {
-    const {
-      posts,
-      tag,
-      visible,
-      editMode,
-      opts,
-      post,
-      page,
-      lastPage,
-      pageCount,
-    } = this.props;
+    const { posts, post, search, edit, paging, PostActions } = this.props;
 
     const {
       handleSearch,
-      handleChange,
+      handleSearchInputChange,
       handleItemClick,
       handleItemEdit,
       handleItemDelete,
-      handleOpenPostEditModal,
+      handlePostEditOpen,
       handlePostEditCancel,
       handlePostEditSubmit,
-      handlePostEditChange,
-      handleClickPage,
-      handleClickPrev,
-      handleClickNext,
+      handlePostEditInputChange,
+      handleChangePage,
     } = this;
 
     return (
@@ -240,44 +186,12 @@ class PostContainer extends Component {
           <Col xl={12}>
             <Card>
               <CardHeader>
-                <Form action="" method="post" className="form-horizontal">
-                  <FormGroup row>
-                    <Col md="2">
-                      <i className="fa fa-align-justify" /> Posts{' '}
-                      <small className="text-muted">example</small>
-                    </Col>
-                    <Col md="6">
-                      <Input
-                        type="text"
-                        id="tag"
-                        name="tag"
-                        placeholder="태그"
-                        value={tag}
-                        onChange={handleChange}
-                      />
-                    </Col>
-                    <Col md="2">
-                      <Button
-                        color="dark"
-                        outline
-                        size="sm"
-                        onClick={handleSearch}
-                      >
-                        검색
-                      </Button>
-                    </Col>
-                    <Col md="2" className="float-right">
-                      <Button
-                        color="dark"
-                        outline
-                        size="sm"
-                        onClick={handleOpenPostEditModal}
-                      >
-                        등록
-                      </Button>
-                    </Col>
-                  </FormGroup>
-                </Form>
+                <PostSearch
+                  search={search}
+                  onChange={handleSearchInputChange}
+                  onSearch={handleSearch}
+                  onWrite={handlePostEditOpen}
+                />
               </CardHeader>
               <CardBody>
                 <PostList
@@ -286,27 +200,18 @@ class PostContainer extends Component {
                   onItemEdit={handleItemEdit}
                   onItemDelete={handleItemDelete}
                 />
-                <Paging
-                  page={page}
-                  lastPage={lastPage}
-                  pageCount={pageCount}
-                  onClickPage={handleClickPage}
-                  onClickPrev={handleClickPrev}
-                  onClickNext={handleClickNext}
-                />
+                <Paging paging={paging} onChangePage={handleChangePage} />
               </CardBody>
             </Card>
           </Col>
         </Row>
         <PostEditModal
-          visible={visible}
-          editMode={editMode}
-          opts={opts}
+          edit={edit}
           post={post}
           toggle={handlePostEditCancel}
           onSubmit={handlePostEditSubmit}
           onCancel={handlePostEditCancel}
-          onChange={handlePostEditChange}
+          onChange={handlePostEditInputChange}
           className={''}
         />
       </div>
@@ -317,15 +222,11 @@ class PostContainer extends Component {
 export default connect(
   state => ({
     args: state.base.getIn(['modal', 'confirm', 'args']),
-    tag: state.post.get('tag'),
-    posts: state.post.get('posts'),
-    visible: state.post.getIn(['postEditModal', 'visible']),
-    editMode: state.post.getIn(['postEditModal', 'editMode']),
-    opts: state.post.getIn(['postEditModal', 'opts']).toJS(),
-    post: state.post.getIn(['postEditModal', 'post']).toJS(),
-    page: state.base.getIn(['paging', 'post', 'page']),
-    lastPage: state.base.getIn(['paging', 'post', 'lastPage']),
-    pageCount: state.base.getIn(['paging', 'post', 'pageCount']),
+    posts: state.post.get('posts').toJS(),
+    post: state.post.get('post').toJS(),
+    search: state.post.get('search').toJS(),
+    edit: state.post.get('edit').toJS(),
+    paging: state.post.get('paging').toJS(),
   }),
   dispatch => ({
     BaseActions: bindActionCreators(baseActions, dispatch),

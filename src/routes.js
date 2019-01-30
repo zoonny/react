@@ -12,7 +12,9 @@ const Dashboard = React.lazy(() => import('views/medi/dashboard/Dashboard'));
 
 // 시스템
 // const UserInfo = React.lazy(() => import('views/onm/userInfo/UserInfo'));
-// const MenuInfo = React.lazy(() => import('views/onm/menuInfo/MenuInfo'));
+const MenuMgmt = React.lazy(() =>
+  import('containers/onm/menuMgmt/MenuMgmtContainer'),
+);
 
 // 예제
 const Alert = React.lazy(() => import('views/example/alert/ReactAlertExample'));
@@ -55,12 +57,12 @@ const routes = [
   //   name: '사용자정보',
   //   component: UserInfo,
   // },
-  // {
-  //   path: '/onm/menuInfo',
-  //   exact: true,
-  //   name: '메뉴정보',
-  //   component: MenuInfo,
-  // },
+  {
+    path: '/onm/menuMgmt',
+    exact: true,
+    name: '메뉴/권한 관리',
+    component: MenuMgmt,
+  },
   // 예제
   {
     path: '/example/alert',

@@ -1,28 +1,43 @@
 import React, { Component } from 'react';
 import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 
-export const endPage = (page, pageCount) => {
-  return pageCount + Math.floor(page / (pageCount + 1)) * pageCount;
-};
-
-export const startPage = (page, pageCount) => {
-  const end = endPage(page, pageCount);
-  return end - pageCount + 1;
-};
+import PagingUtils from 'libs/PagingUtils';
 
 class Paging extends Component {
-  render() {
-    const {
-      page,
-      lastPage,
-      pageCount,
-      onClickPage,
-      onClickPrev,
-      onClickNext,
-    } = this.props;
+  handleClickPage = async e => {
+    const { onChangePage } = this.props;
 
-    // const end = pageCount + Math.floor(page / (pageCount + 1)) * pageCount;
-    const end = endPage(page, pageCount);
+    onChangePage(parseInt(e.target.id));
+  };
+
+  handleClickPrev = async e => {
+    const { paging } = this.props;
+    const { page, pageCount } = paging;
+
+    const { onChangePage } = this.props;
+
+    onChangePage(PagingUtils.endPage(page, pageCount) - pageCount);
+  };
+
+  handleClickNext = async e => {
+    const { paging } = this.props;
+    const { page, pageCount } = paging;
+
+    const { onChangePage } = this.props;
+
+    onChangePage(PagingUtils.startPage(page, pageCount) + pageCount);
+  };
+
+  render() {
+    const { paging } = this.props;
+    const { page, lastPage, pageCount } = paging;
+
+    const { handleClickPage, handleClickPrev, handleClickNext } = this;
+
+    console.log('page', page);
+    console.log('lastPage', lastPage);
+
+    const end = PagingUtils.endPage(page, pageCount);
     const start = end - pageCount + 1;
     const pageArr = [];
     let index = start;
@@ -49,7 +64,7 @@ class Paging extends Component {
       <div className="animated fadeIn">
         <Pagination className="pagination justify-content-center">
           <PaginationItem {...prevOpts}>
-            <PaginationLink previous tag="button" onClick={onClickPrev} />
+            <PaginationLink previous tag="button" onClick={handleClickPrev} />
           </PaginationItem>
           {pageArr.map((item, index) => {
             let opts = null;
@@ -62,14 +77,18 @@ class Paging extends Component {
 
             return (
               <PaginationItem key={index} {...opts}>
-                <PaginationLink id={item} tag="button" onClick={onClickPage}>
+                <PaginationLink
+                  id={item}
+                  tag="button"
+                  onClick={handleClickPage}
+                >
                   {item}
                 </PaginationLink>
               </PaginationItem>
             );
           })}
           <PaginationItem {...nextOpts}>
-            <PaginationLink next tag="button" onClick={onClickNext} />
+            <PaginationLink next tag="button" onClick={handleClickNext} />
           </PaginationItem>
         </Pagination>
       </div>
