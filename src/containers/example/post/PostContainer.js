@@ -33,6 +33,7 @@ class PostContainer extends Component {
     }
   };
 
+  // PostSearch
   handleSearch = e => {
     this.getPostList();
   };
@@ -48,26 +49,23 @@ class PostContainer extends Component {
   };
 
   // PostItem
-  handleItemClick = async e => {
+  handlePostEditModal = async (id, visible, mode) => {
     const { PostActions } = this.props;
 
-    await PostActions.getPost(e.target.id);
+    await PostActions.getPost(id);
 
     PostActions.openPostEditModal({
-      visible: true,
-      mode: 'r',
+      visible: visible,
+      mode: mode,
     });
   };
 
+  handleItemClick = e => {
+    this.handlePostEditModal(e.target.id, true, 'r');
+  };
+
   handleItemEdit = async e => {
-    const { PostActions } = this.props;
-
-    await PostActions.getPost(e.target.id);
-
-    PostActions.openPostEditModal({
-      visible: true,
-      mode: 'e',
-    });
+    this.handlePostEditModal(e.target.id, true, 'e');
   };
 
   handleItemDelete = e => {
@@ -165,7 +163,7 @@ class PostContainer extends Component {
   };
 
   render() {
-    const { posts, post, search, edit, paging, PostActions } = this.props;
+    const { posts, post, search, edit, paging } = this.props;
 
     const {
       handleSearch,
