@@ -34,9 +34,6 @@ class Paging extends Component {
 
     const { handleClickPage, handleClickPrev, handleClickNext } = this;
 
-    console.log('page', page);
-    console.log('lastPage', lastPage);
-
     const end = PagingUtils.endPage(page, pageCount);
     const start = end - pageCount + 1;
     const pageArr = [];

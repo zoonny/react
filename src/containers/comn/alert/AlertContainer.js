@@ -6,6 +6,8 @@ import { withRouter } from 'react-router-dom';
 
 import { Alert } from 'reactstrap';
 
+console.warn('This component is deprecated');
+
 class AlertContainer extends Component {
   render() {
     const { visible, message } = this.props;

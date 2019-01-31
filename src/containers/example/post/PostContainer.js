@@ -17,10 +17,12 @@ import InputParser from 'libs/InputParser';
 import withPaging from 'containers/comn/hoc/withPaging';
 import withEditModal from 'containers/comn/hoc/withEditModal';
 import { withRouter } from 'react-router-dom';
+import { withAlert } from 'react-alert';
 
 class PostContainer extends Component {
   // PostContainer
   componentDidMount() {
+    this.initialize();
     this.getPostList();
   }
 
@@ -28,12 +30,19 @@ class PostContainer extends Component {
     if (this.props.paging !== nextProps.paging) {
       this.getPostList(null, nextProps.paging.page);
     }
+
     return true;
   }
 
   // PostList
+  initialize = () => {
+    const { PostActions } = this.props;
+
+    PostActions.initialize();
+  };
+
   getPostList = async (tag, page) => {
-    const { search, paging, PostActions } = this.props;
+    const { search, paging, PostActions, alert } = this.props;
 
     try {
       await PostActions.getPostList({
@@ -41,7 +50,7 @@ class PostContainer extends Component {
         page: page ? page : paging.page,
       });
     } catch (e) {
-      console.error(e);
+      alert.show(e.name + ': ' + e.message);
     }
   };
 
@@ -61,18 +70,34 @@ class PostContainer extends Component {
   };
 
   // PostItem
-  handleItemClick = async e => {
-    const { PostActions, onEditOpenForRead } = this.props;
+  handleItemWrite = e => {
+    const { PostActions, onEditOpenForWrite } = this.props;
 
-    await PostActions.getPost(e.target.id);
+    PostActions.initializePost();
+
+    onEditOpenForWrite();
+  };
+
+  handleItemClick = async e => {
+    const { PostActions, onEditOpenForRead, alert } = this.props;
+
+    try {
+      await PostActions.getPost(e.target.id);
+    } catch (e) {
+      alert.show(e.name + ': ' + e.message);
+    }
 
     onEditOpenForRead();
   };
 
   handleItemEdit = async e => {
-    const { PostActions, onEditOpenForEdit } = this.props;
+    const { PostActions, onEditOpenForEdit, alert } = this.props;
 
-    await PostActions.getPost(e.target.id);
+    try {
+      await PostActions.getPost(e.target.id);
+    } catch (e) {
+      alert.show(e.name + ': ' + e.message);
+    }
 
     onEditOpenForEdit();
   };
@@ -90,13 +115,17 @@ class PostContainer extends Component {
   };
 
   deleteItem = async e => {
-    const { BaseActions, PostActions, hideConfirm } = this.props;
+    const { BaseActions, PostActions, alert } = this.props;
 
-    await PostActions.removePost(e.target.id);
-
-    BaseActions.hideModal({
-      modalName: Constants.MODAL.CONFIRM,
-    });
+    try {
+      await PostActions.removePost(e.target.id);
+    } catch (e) {
+      alert.show(e.name + ': ' + e.message);
+    } finally {
+      BaseActions.hideModal({
+        modalName: Constants.MODAL.CONFIRM,
+      });
+    }
 
     this.getPostList();
   };
@@ -115,7 +144,7 @@ class PostContainer extends Component {
   handlePostEditSubmit = async e => {
     e.preventDefault();
 
-    const { edit, PostActions, onEditCancel } = this.props;
+    const { edit, PostActions, onEditCancel, alert } = this.props;
 
     const form = e.target;
     const data = new FormData(form);
@@ -128,20 +157,29 @@ class PostContainer extends Component {
       tags: data.get('tags') ? data.get('tags').split(',') : [],
     };
 
-    if (edit.mode === Constants.EDIT_MODE.WRITE) {
-      await PostActions.writePost(post);
-    } else if (edit.mode === Constants.EDIT_MODE.EDIT) {
-      await PostActions.editPost({
-        ...post,
-        id: e.target.id,
-      });
-    } else {
-      console.error('Unknown EditMode:', edit.mode);
+    try {
+      switch (edit.mode) {
+        case Constants.EDIT_MODE.WRITE:
+          await PostActions.writePost(post);
+          break;
+        case Constants.EDIT_MODE.EDIT:
+          await PostActions.editPost({
+            ...post,
+            id: e.target.id,
+          });
+          break;
+        default:
+          console.error('Unknown EditMode:', edit.mode);
+          break;
+      }
+    } catch (e) {
+      alert.show(e.name + ': ' + e.message);
+      return;
+    } finally {
+      onEditCancel();
     }
 
     this.getPostList();
-
-    onEditCancel();
   };
 
   render() {
@@ -152,13 +190,13 @@ class PostContainer extends Component {
       edit,
       paging,
       onChangePage,
-      onEditOpenForWrite,
       onEditCancel,
     } = this.props;
 
     const {
       handleSearch,
       handleSearchInputChange,
+      handleItemWrite,
       handleItemClick,
       handleItemEdit,
       handleItemDelete,
@@ -176,7 +214,7 @@ class PostContainer extends Component {
                   search={search}
                   onChange={handleSearchInputChange}
                   onSearch={handleSearch}
-                  onWrite={onEditOpenForWrite}
+                  onWrite={handleItemWrite}
                 />
               </CardHeader>
               <CardBody>
@@ -215,6 +253,8 @@ class PostContainer extends Component {
 export default connect(
   state => ({
     args: state.base.getIn(['modal', 'confirm', 'args']),
+    error: state.post.get('error'),
+    pending: state.post.get('pending'),
     posts: state.post.get('posts').toJS(),
     post: state.post.get('post').toJS(),
     search: state.post.get('search').toJS(),
@@ -223,4 +263,4 @@ export default connect(
     BaseActions: bindActionCreators(baseActions, dispatch),
     PostActions: bindActionCreators(postActions, dispatch),
   }),
-)(withRouter(withEditModal(withPaging(PostContainer))));
+)(withRouter(withAlert(withEditModal(withPaging(PostContainer)))));

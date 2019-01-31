@@ -62,4 +62,6 @@ git add .
 git commit -m 'first commit'
 git remote add origin https://github.com/zoonny/react.git
 git push -u origin master
+git remote add onm https://github.com/zoonny/react.git
+git push -u onm master
 ```
