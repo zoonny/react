@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as baseActions from 'store/comn/base';
 import ConfirmModal from 'views/comn/modal/ConfirmModal';
-import { withRouter } from 'react-router-dom';
 
 class ConfirmModalContainer extends Component {
   handleCancel = e => {
@@ -18,8 +17,6 @@ class ConfirmModalContainer extends Component {
   render() {
     const { visible, title, message, onConfirm, args } = this.props;
     const { handleCancel, toggle } = this;
-
-    console.log('args', args);
 
     return (
       <ConfirmModal
@@ -47,4 +44,4 @@ export default connect(
   dispatch => ({
     BaseActions: bindActionCreators(baseActions, dispatch),
   }),
-)(withRouter(ConfirmModalContainer));
+)(ConfirmModalContainer);

@@ -8,13 +8,9 @@ import { Alert } from 'reactstrap';
 
 class AlertContainer extends Component {
   render() {
-    const { visible } = this.props;
+    const { visible, message } = this.props;
 
-    return (
-      visible && (
-        <Alert color="primary">This is a primary alert — check it out!</Alert>
-      )
-    );
+    return visible && <Alert color="primary">{message}</Alert>;
   }
 }
 

@@ -1,18 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import {
-  Badge,
-  Card,
-  CardBody,
-  CardHeader,
-  Col,
-  Row,
-  Table,
-  Button,
-} from 'reactstrap';
+import { Button } from 'reactstrap';
 import moment from 'moment';
 
-function PostItem({ index, post, onItemClick, onItemEdit, onItemDelete }) {
+const PostItem = ({ index, post, onItemClick, onItemEdit, onItemDelete }) => {
   // don't pass key
   const { _id, title, body, tags, publishedDate } = post;
 
@@ -36,6 +27,6 @@ function PostItem({ index, post, onItemClick, onItemEdit, onItemDelete }) {
       </td>
     </tr>
   );
-}
+};
 
 export default PostItem;

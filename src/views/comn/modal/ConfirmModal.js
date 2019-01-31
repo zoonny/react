@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
+import { Constants } from 'libs/Constants';
 
 const ConfirmModal = ({
   visible,
@@ -17,10 +18,10 @@ const ConfirmModal = ({
     <ModalFooter>
       {/* <Button id="ok" color="primary" onClick={onConfirm}> */}
       <Button id={args} color="primary" onClick={onConfirm}>
-        확인
+        {Constants.BUTTON.CONFIRM}
       </Button>{' '}
       <Button id="cancel" color="secondary" onClick={onCancel}>
-        취소
+        {Constants.BUTTON.CANCEL}
       </Button>
     </ModalFooter>
   </Modal>

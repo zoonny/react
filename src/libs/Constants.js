@@ -1,15 +1,30 @@
-const Constants = {
-  EDIT_MODE: {
-    WRITE: 'w',
-    READ: 'r',
-    EDIT: 'e',
+export const Constants = {
+  MODAL: {
+    CONFIRM: 'confirm',
   },
-  EDIT_MESSAGE: {
+  EDIT_MODE: {
+    WRITE: 'WRITE',
+    READ: 'READ',
+    EDIT: 'EDIT',
+  },
+  EDIT_TITLE: {
     WRITE: '등록',
     READ: '조회',
     EDIT: '수정',
-    CLOSE: '삭제',
+  },
+  BUTTON: {
+    WRITE: '등록',
+    READ: '조회',
+    EDIT: '수정',
+    DELETE: '삭제',
+    CLOSE: '닫기',
+    CONFIRM: '확인',
+    CANCEL: '취소',
   },
 };
 
-export default Constants;
+export const GetConstants = {
+  getEditTitle: mode => {
+    return Constants.EDIT_TITLE[mode];
+  },
+};

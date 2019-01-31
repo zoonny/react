@@ -42,8 +42,6 @@ export default handleActions(
   {
     [SHOW_MODAL]: (state, action) => {
       const { modalName, title, message, onConfirm, args } = action.payload;
-      console.log('payload', action.payload);
-      console.log('args', args);
       return state
         .setIn(['modal', modalName, 'visible'], true)
         .setIn(['modal', modalName, 'title'], title)
