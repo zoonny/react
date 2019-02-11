@@ -5,7 +5,6 @@ const withPaging = WrappedComponent => {
     state = {
       paging: {
         page: 1,
-        lastPage: 5,
         pageCount: 3,
       },
     };

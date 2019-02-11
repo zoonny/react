@@ -43,6 +43,7 @@ const initialState = fromJS({
   search: {
     tag: '',
   },
+  lastPage: 5,
 });
 
 // reducer
@@ -79,7 +80,7 @@ export default handleActions(
         const lastPage = _lastPage ? _lastPage : '5';
         return state
           .set('posts', fromJS(posts))
-          .setIn(['paging', 'lastPage'], parseInt(lastPage, 10));
+          .set('lastPage', parseInt(lastPage, 10));
       },
       // onPending: (state, action) => state,
       onError: (state, action) => {

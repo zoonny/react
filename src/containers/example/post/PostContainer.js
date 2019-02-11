@@ -187,6 +187,7 @@ class PostContainer extends Component {
       posts,
       post,
       search,
+      lastPage,
       edit,
       paging,
       onChangePage,
@@ -224,7 +225,11 @@ class PostContainer extends Component {
                   onItemEdit={handleItemEdit}
                   onItemDelete={handleItemDelete}
                 />
-                <Paging paging={paging} onChangePage={onChangePage} />
+                <Paging
+                  paging={paging}
+                  lastPage={lastPage}
+                  onChangePage={onChangePage}
+                />
               </CardBody>
             </Card>
           </Col>
@@ -258,6 +263,7 @@ export default connect(
     posts: state.post.get('posts').toJS(),
     post: state.post.get('post').toJS(),
     search: state.post.get('search').toJS(),
+    lastPage: state.post.get('lastPage'),
   }),
   dispatch => ({
     BaseActions: bindActionCreators(baseActions, dispatch),

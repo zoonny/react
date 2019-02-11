@@ -29,8 +29,8 @@ class Paging extends Component {
   };
 
   render() {
-    const { paging } = this.props;
-    const { page, lastPage, pageCount } = paging;
+    const { paging, lastPage } = this.props;
+    const { page, pageCount } = paging;
 
     const { handleClickPage, handleClickPrev, handleClickNext } = this;
 

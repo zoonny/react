@@ -5,16 +5,35 @@ import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Select from 'react-select';
+
+const options = [
+  { value: 'item1', label: 'ITEM1' },
+  { value: 'item2', label: 'ITEM2' },
+  { value: 'item3', label: 'ITEM3' },
+];
 
 class ReactAlertExample extends Component {
+  state = {
+    selectedOption: null,
+  };
+
   handleOpenAlert = () => {
     this.props.alert.show('Alert Message!!');
+  };
+
+  handleSelectChange = selectedOption => {
+    this.setState({
+      selectedOption,
+    });
+    console.log('Option selected:', selectedOption);
   };
 
   notify = () => toast('Wow so easy !');
 
   render() {
-    const { handleOpenAlert, notify } = this;
+    const { handleOpenAlert, notify, handleSelectChange } = this;
+    const { selectedOption } = this.state;
 
     return (
       <>
@@ -47,6 +66,13 @@ class ReactAlertExample extends Component {
               </Col>
               <Col col="6" sm="4" md="2" xl className="mb-3 mb-xl-0">
                 <Button onClick={notify}>react-toastify</Button>
+              </Col>
+              <Col>
+                <Select
+                  value={selectedOption}
+                  onChange={handleSelectChange}
+                  options={options}
+                />
               </Col>
             </Row>
           </CardHeader>
