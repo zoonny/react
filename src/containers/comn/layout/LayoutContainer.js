@@ -92,7 +92,6 @@ class LayoutContainer extends Component {
 
   componentWillMount() {
     console.log('componentWillMount...');
-    console.table(process.env);
     this.signIn();
     this.getMenu();
   }
