@@ -1,4 +1,4 @@
-import inputParsers from './inputParsers';
+import inputParsers from './InputParsers';
 
 const InputParser = {
   parseInputData: (form, data) => {

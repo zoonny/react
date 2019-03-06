@@ -74,7 +74,7 @@
     "react-scripts": "^2.1.1"
   },
   "scripts": {
-    "start": "cp ./.env.dev ./.env && react-scripts start",
+    "start": "react-scripts start",
     "start:stg": "cp ./.env.stg ./.env && react-scripts start",
     "start:prd": "cp ./.env.prd ./.env && react-scripts start",
     "build": "react-scripts build",
